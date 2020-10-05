@@ -10,28 +10,45 @@ namespace DiscordBotTest.Commands
 	class MathCommands
 	{
 		[Command("Add")]
-		public async Task Add(CommandContext ctx)
+		[Description("Adds two numbers together")]
+		public async Task Add(CommandContext ctx,
+		[Description("first number")] double numOne,
+		[Description("second number")] double NumTwo)
 		{
-			await ctx.Channel.SendMessageAsync("Pong").ConfigureAwait(false);
+			await ctx.Channel.SendMessageAsync((numOne + NumTwo).ToString()).ConfigureAwait(false);
 		}
 		[Command("Subtract")]
-		public async Task Subtract(CommandContext ctx)
+		[Description("Subtracts two numbers together")]
+		public async Task Subtract(CommandContext ctx,
+		[Description("first number")] double numOne,
+		[Description("second number")] double NumTwo)
 		{
-			await ctx.Channel.SendMessageAsync("Pong").ConfigureAwait(false);
+			await ctx.Channel.SendMessageAsync((numOne - NumTwo).ToString()).ConfigureAwait(false);
 		}
 		[Command("Multiply")]
-		public async Task Multiply(CommandContext ctx)
+		[Description("Multiplys two numbers together")]
+		public async Task Multiply(CommandContext ctx,
+		[Description("first number")] double numOne,
+		[Description("second number")] double NumTwo)
 		{
-			await ctx.Channel.SendMessageAsync("Pong").ConfigureAwait(false);
+			await ctx.Channel.SendMessageAsync((numOne * NumTwo).ToString()).ConfigureAwait(false);
 		}
 		[Command("Divide")]
-		public async Task Divide(CommandContext ctx)
-		{
-			await ctx.Channel.SendMessageAsync("Pong").ConfigureAwait(false);
+		[Description("Divides two numbers together")]
+		public async Task Divide(CommandContext ctx,
+		[Description("first number")] double numOne,
+		[Description("second number")] double NumTwo){
+			try{
+				double d = numOne / NumTwo;
+				await ctx.Channel.SendMessageAsync(d.ToString()).ConfigureAwait(false);
+			}catch (DivideByZeroException){
+				await ctx.Channel.SendMessageAsync("**Error:**\nCan not divide by zero");
+			}
 		}
 		[Command("LinEqu")]
-		public async Task LineearEquasion(CommandContext ctx){
-			await ctx.Channel.SendMessageAsync("Pong").ConfigureAwait(false);
+		public async Task LineearEquasion(CommandContext ctx)
+		{
+			await ctx.Channel.SendMessageAsync("Not implemented yet").ConfigureAwait(false);
 			return;
 			//variables
 			bool test = true;

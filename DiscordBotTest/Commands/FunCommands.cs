@@ -11,14 +11,15 @@ namespace DiscordBotTest.Commands
 	public class FunCommands// : CommandsNextModule
 	{
 		[Command("Ping")]
+		[Description("Returns the ping")]
 		public async Task PingCom(CommandContext ctx)
 		{
 			await ctx.Channel.SendMessageAsync($"Pong\nPing: {Program.bot.Client.Ping}ms").ConfigureAwait(false);
 		}
 		[Command("Spam")]
-		public async Task PrefixJoke(CommandContext ctx)
+		public async Task PrefixJoke(CommandContext ctx, DiscordUser user, int delay, string msg = "", bool useDms = false)
 		{
-			await ctx.Channel.SendMessageAsync("Spaming {}").ConfigureAwait(false);
+			await ctx.Channel.SendMessageAsync($"Spaming {user.Username}\n**Not implemented yet**").ConfigureAwait(false);
 		}
 	}
 }
