@@ -21,5 +21,16 @@ namespace DiscordBotTest.Commands
 		{
 			await ctx.Channel.SendMessageAsync($"Spaming {user.Username}\n**Not implemented yet**").ConfigureAwait(false);
 		}
+		//	EZ
+		//███████╗███████╗
+		//██╔════╝╚════██║
+		//█████╗░░░░███╔═╝
+		//██╔══╝░░██╔══╝░░
+		//███████╗███████╗
+		//╚══════╝╚══════╝
+		[Command("EZ")]
+		public async Task EZ(CommandContext ctx){
+			await ctx.Channel.SendMessageAsync("**EZ**\n███████╗███████╗\n██╔════╝╚════██║\n█████╗░░░░███╔═╝\n██╔══╝░░██╔══╝░░\n███████╗███████╗\n╚══════╝╚══════╝").ConfigureAwait(false);
+		}
 	}
 }

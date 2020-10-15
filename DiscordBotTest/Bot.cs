@@ -39,7 +39,7 @@ namespace DiscordBotTest
 				IgnoreExtraArguments = true,
 				EnableMentionPrefix = false,
 				CaseSensitive = false,
-				EnableDms = false,
+				EnableDms = true,
 			};
 			Commads = Client.UseCommandsNext(commandsConfig);
 			CommReg();
