@@ -70,12 +70,12 @@ namespace DiscordBotTest.Commands
 				embed = new DiscordEmbedBuilder
 				{
 					Color = color,
-					//Author = new DiscordEmbedBuilder.EmbedAuthor
-					//{
-					//	Name = ctx.User.Nickname,
-					//	IconUrl = ctx.User.AvatarUrl,
-					//	//Url = "https://discord.com/users" + ctx.User.Id.ToString()
-					//},
+					Author = new DiscordEmbedBuilder.EmbedAuthor
+					{
+						Name = ctx.User.Username,
+						IconUrl = ctx.User.AvatarUrl,
+						Url = "https://discord.com/users/" + ctx.User.Id.ToString()
+					},
 					Title = "Poll",
 					Description = string.Join("\n", sOptions),
 					Footer = new DiscordEmbedBuilder.EmbedFooter

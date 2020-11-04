@@ -55,12 +55,12 @@ namespace DiscordBotTest
 				CaseSensitive = false,
 				EnableDms = true,
 			};
+	//	"It JUST works"
+#pragma warning disable CS4014//Because this call is not awaited, execution of the current method continues before the call is completed
 			Commads = Client.UseCommandsNext(commandsConfig);
 			CommReg();
 			await Client.ConnectAsync();
-#pragma warning disable CS4014//Because this call is not awaited, execution of the current method continues before the call is completed
 			Close();
-#pragma warning restore CS4014
 			await IsClosed();
 			//await Task.Delay(-1);
 		}
@@ -78,21 +78,25 @@ namespace DiscordBotTest
 		}
 		private async Task Close()
 		{
+			await Task.Delay(1);
 			while (!running){}
 			Console.WriteLine("Write close to stop the bot");
-			while (running){
-				string line = Console.ReadLine().ToLower();
-				if (line == "close"){
-					await Client.DisconnectAsync();
-					running = false;
-				}
+			while (running)
+				Check();
+		}
+		private async Task Check(){
+			string line = Console.ReadLine().ToLower();
+			if (line == "close"){
+			await Client.DisconnectAsync();
+			running = false;
 			}
 		}
+#pragma warning restore CS4014
 		private async Task IsClosed()
 		{
+			await Task.Delay(1);
 			while (!running) { }
 			while (running) { }
-			await Task.Delay(1);
 		}
 	}
 }
