@@ -41,14 +41,14 @@ namespace DiscordBotTest.Commands
 		[Description("second number")] double numTwo){
 			if (numTwo == 0)
 			{
-				await ctx.Channel.SendMessageAsync("**Error:**\nCan not divide by zero");
+				await ctx.Channel.SendMessageAsync("**Error:**\nCan't divide by zero");
 				return;
 			}
 			double d = numOne / numTwo;
 			await ctx.Channel.SendMessageAsync(d.ToString()).ConfigureAwait(false);
 		}
 		[Command("LinEqu")]
-		[Description("Solves a LinearEquasion formated like this: 1x+1y=22,5^2,5x+1y=6")]
+		[Description("Solves a LinearEquasion formated like this: 12,5x+-3y=22,5^2,5x+-1y=6")]
 		public async Task LinearEquasion(CommandContext ctx, string args)
 		{
 			//variables
@@ -58,7 +58,7 @@ namespace DiscordBotTest.Commands
 			double Dn, Dx, Dy;
 			if (args.ToLower() == "help")
 			{
-				await ctx.Channel.SendMessageAsync("**Format like this:** 1x+1y=22,5^2,5x+1y=6");
+				await ctx.Channel.SendMessageAsync("**Format like this:** 12,5x+-3y=22,5^2,5x+1y=6");
 				return;
 			}
 			//inputhandling
@@ -70,6 +70,7 @@ namespace DiscordBotTest.Commands
 				p[1] = lines[i].IndexOf('y');
 				p[2] = lines[i].IndexOf('=') + 1;
 				p[3] = lines[i].IndexOf('+') + 1;
+#pragma warning disable CA1031//Do not catch general exception types
 				try{
 					Output += $"A{i+1} = {lines[i].Substring(0, p[0])}; ";	//0 = a from ax
 					Output += $"B{i+1} = {lines[i][p[3]..p[1]]}; ";			//1 = b from by
@@ -79,7 +80,7 @@ namespace DiscordBotTest.Commands
 					return;
 				}//conversion to number
 				try{
-					vars[i, 0] = Convert.ToDouble(lines[i].Substring(0, p[0]));
+					vars[i, 0] = Convert.ToDouble(lines[i].Substring(0, p[0]));						//0 = a from ax
 				}catch (FormatException){
 					try{
 						vars[i, 0] = (double)Convert.ToInt32(lines[i].Substring(0, p[0]));
@@ -88,7 +89,7 @@ namespace DiscordBotTest.Commands
 						return;
 					}
 				}try{
-					vars[i, 1] = Convert.ToDouble(lines[i][p[3]..p[1]]);                    //1 = b from by
+					vars[i, 1] = Convert.ToDouble(lines[i][p[3]..p[1]]);							//1 = b from by
 				}catch (FormatException){
 					try{
 						vars[i, 1] = (double)Convert.ToInt32(lines[i][p[3]..p[1]]);
@@ -98,7 +99,7 @@ namespace DiscordBotTest.Commands
 					}
 				}
 				try{
-					vars[i, 2] = Convert.ToDouble(lines[i].Substring(p[2]));                //2 = c
+					vars[i, 2] = Convert.ToDouble(lines[i].Substring(p[2]));						//2 = c
 				}catch (FormatException){
 					try{
 						vars[i, 2] = (double)Convert.ToInt32(lines[i].Substring(p[2]));
@@ -107,6 +108,7 @@ namespace DiscordBotTest.Commands
 						return;
 					}
 				}
+#pragma warning restore CA1031//Do not catch general exception types
 				Output += "\n";
 			}
 			//math
@@ -125,7 +127,7 @@ namespace DiscordBotTest.Commands
 			//output
 			if (Dn == 0)
 				if (Dx == Dy && Dx == 0)
-					Output += "Both equasions are the same\n"/*\nIL={(x|y)|" +  + "x" + "y" + "}"*/;
+					Output += "Both equasions are the same\n"/*╙={(x|y)|" +  + "x" + "y" + "}"*/;
 				else
 					Output += "There is no solution\n╙={}\n";
 			else
