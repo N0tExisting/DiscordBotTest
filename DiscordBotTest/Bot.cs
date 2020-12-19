@@ -17,7 +17,7 @@ namespace DiscordBotTest
 	{
 		public bool running = false;
 		public DiscordClient Client { get; private set; }
-		public InteractivityModule Interactivity { get; protected set; }
+		public InteractivityModule Interactivity { get; private set; }
 		public CommandsNextModule Commads { get; private set; }
 		public ConfigJson configJson { get; private set; }
 		public async Task RunAsync(string[] args)

@@ -17,6 +17,7 @@ namespace DiscordBotTest
 #elif RELEASE
 			Console.WriteLine("Release Build");
 #endif
+			//TODO: end programm when closing bot
 			bot = new Bot();
 			Console.WriteLine("Initializing Bot");
 			bot.RunAsync(args).GetAwaiter().GetResult();
